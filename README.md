@@ -1,4 +1,4 @@
-MoreEpochs mod v2.0 by JustAMiner.
+MoreEpochs mod v2.1 by JustAMiner.
 ***********************************
 
 Default Claymore ETH Miner v15.0 only supports up to 384 DAG epoch, and
@@ -47,7 +47,7 @@ complete its job successfully, you will see green colored message below
 Claymore's logo:
 
  ******************************************************************
- *               MoreEpochs mod v2.0 by JustAMiner                *
+ *               MoreEpochs mod v2.1 by JustAMiner                *
  *                    justaminer@tutanota.com                     *
  *       https://bitcointalk.org/index.php?topic=5305046.0        *
  ******************************************************************
@@ -84,7 +84,7 @@ List of working GPUs:
 
 AMD GPUs that work fine (tested on AMD video driver 20.12.1)
 
-- 8 GB AMD Polaris: RX 470, 480, 570, 580
+- 8 GB AMD Polaris: RX 470, 480, 570, 580, 590
 - 8 GB AMD Navi: RX 5500XT, 5600, 5600XT, 5700, 5700XT
 - 8+ GB AMD Vega GPUs
 
@@ -99,13 +99,15 @@ greatly increase mining speed.
 If you are going to use these options first time, you will need to do next
 steps once:
 
-1) in miner folder go to "\strap_driver" subfolder and run as 
+1) run miner as administrator once with "-rxboost 1" option. Miner should
+automatically uninstall old strap driver and install new one. If miner
+was unable to do auto uninstall/install of new strap driver, see step 2) and 3).
+
+2) in miner folder go to "\strap_driver" subfolder and run as 
 admin "uninstall_strap_driver.cmd". This will stop and uninstall old strap
 driver if it was installed.
 
-2) run miner as admin with "-driver install" option, or with 
-"-benchmark 385 -rxboost 1", and miner will try to install new strap driver 
-that supports new AMD video drivers.
+3) run miner as admin with "-driver install" option.
 
 If miner successfully installed new strap driver, you will see next messages:
 
@@ -116,7 +118,7 @@ use -rxboost and -strap options.
 
 Note that rxboost/straps now apply after DAG generation to avoid possible
 DAG corruption. When DAG generation is finished and if rxboost/strap applied
-successfully, you will see next messages :
+successfully, you will see next green colored messages :
 
  'GPU #x strap "..." is applied successfully'
  'GPU #x -rxboost option is applied successfully'
@@ -196,6 +198,23 @@ Email: justaminer@tutanota.com
 
 MOD VERSION HISTORY:
 ********************
+
+v2.1
+----------------
+
+- Changed behavior of "-driver uninstall" option. By default, miner also tries to disable testsigning mode during strap driver uninstall. This
+  often leads to error on systems with SecureBoot enabled and prevents miner from uninstalling strap driver. Now when miner started with 
+  "-driver uninstall" option, it only uninstalls strap driver without trying to disable testsigning mode. 
+
+- Command line option "-mode" now has default value of 1, which means that if this option is not specified, dual-mining mode is disabled by default
+  and miner works in ETH-only mining mode. This is usefull for AMD GPUs (Polaris), because allow miner to get best mining speed by either automatic or
+  manual fine-tuning of -dcri values.
+
+- Added messages that straps/rxboost will be applied after DAG generation if strap/rxboost options used. Remade several messages that miner 
+  displays in case of error during installing/uninstalling strap driver to give user more clear instructions.
+
+- Several small fixes.
+
 
 v2.0
 ----------------
