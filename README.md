@@ -1,4 +1,4 @@
-MoreEpochs mod v2.1 by JustAMiner.
+MoreEpochs mod v2.2 by JustAMiner.
 ***********************************
 
 Default Claymore ETH Miner v15.0 only supports up to 384 DAG epoch, and
@@ -12,15 +12,11 @@ of video memory: Polaris RX 470,480,570,580,590, Navi RX 5500XT, 5600, 5600XT,
 
 The mod also fixes bugs of the original miner and adds new features:
 
-Fixed bugs of the original miner:
----------------------------------
-
-~ miner was unable to access nvml.dll on Windows 10, so temperature
-  monitoring, fan control and power draw stats were unavailable.
-
-
 Added features:
 ---------------
+
+~ command line option "-strap" now works for AMD Polaris GPUs on video drivers 20.5.1+,
+  that allows the mod to outperform any other miners for Polaris GPUs.
 
 ~ now miner supports Nvidia drivers 460.89+ and initializes NVML properly 
   with these drivers, so temperature monitoring, fan control and power draw
@@ -28,7 +24,21 @@ Added features:
 
 ~ now miner shows AMD GPUs power draw stat on newer AMD drivers (tested with 20.12.1).
 
-~ command line option "-strap" now works for AMD Polaris GPUs on video drivers 20.5.1+
+~ now miner shows AMD driver version at startup and warns if driver's version is not
+  supported.
+
+~ now miner saves AMD Polaris GPUs' core and memory clocks/voltages at startup (before
+  applying custom ones with -cclock,-mclock,-cvddc,-mvdcc) and restores it during exit.
+
+
+Fixed bugs of the original miner:
+---------------------------------
+
+~ miner was unable to access nvml.dll on Windows 10, so temperature
+  monitoring, fan control and power draw stats were unavailable.
+
+~ miner was unable to apply core clocks from -cclock to Navi GPUs on new video drivers.
+
 
 
 
@@ -47,7 +57,7 @@ complete its job successfully, you will see green colored message below
 Claymore's logo:
 
  ******************************************************************
- *               MoreEpochs mod v2.1 by JustAMiner                *
+ *               MoreEpochs mod v2.2 by JustAMiner                *
  *                    justaminer@tutanota.com                     *
  *       https://bitcointalk.org/index.php?topic=5305046.0        *
  ******************************************************************
@@ -68,7 +78,7 @@ Drivers:
 
 You should use AMD video driver 20.5.1 or newer (most tests were done on
 driver 20.12.1), because older drivers can't allocate 4+ GB video buffer
-in single chunk and that will prevent the miner from creating 4+ GB DAG.
+as single piece and that will prevent the miner from creating 4+ GB DAG.
 
 
 Issues:
@@ -124,6 +134,14 @@ successfully, you will see next green colored messages :
  'GPU #x -rxboost option is applied successfully'
 
 where x is GPU index that rxboost/strap applied to and "..." is specific strap.
+
+
+Be aware, that some software can prevent straps from working. For example tool
+named "HwInfo" does that, if you started it once, straps won't have effect
+on mining speed until you reboot your rig. Also make sure that you didn't
+set manual memory timings in AMD Radeon Software, this also doesn't allow
+straps to work.
+
 
 Please note that both -rxboost and -strap can crash/freeze your rig because
 not every GPU is able to work with faster timings especially at high memory
@@ -198,6 +216,19 @@ Email: justaminer@tutanota.com
 
 MOD VERSION HISTORY:
 ********************
+
+v2.2
+----------------
+
+- Now miner saves AMD Polaris GPUs' core and memory clocks/voltages at startup (before applying custom ones with -cclock,-mclock,-cvddc,-mvdcc)
+  and restores it during exit.
+
+- Now miner shows AMD driver version at startup and warns if it's not supported.
+
+- Fixed bug of original miner with applying -cclock values to Navi GPUs on new video drivers.
+
+- Several minor fixes.
+
 
 v2.1
 ----------------
