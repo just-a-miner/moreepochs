@@ -1,5 +1,5 @@
-MoreEpochs mod v2.2 by JustAMiner.
-***********************************
+MoreEpochs mod v2.4 by JustAMiner
+*********************************
 
 Default Claymore ETH Miner v15.0 only supports up to 384 DAG epoch, and
 the miner stopped working already. MoreEpochs mod adds support of DAG 
@@ -16,7 +16,7 @@ Added features:
 ---------------
 
 ~ command line option "-strap" now works for AMD Polaris GPUs on video drivers 20.5.1+,
-  that allows the mod to outperform any other miners for Polaris GPUs.
+  that allows the mod to outperform any other miner for Polaris GPUs.
 
 ~ now miner supports Nvidia drivers 460.89+ and initializes NVML properly 
   with these drivers, so temperature monitoring, fan control and power draw
@@ -25,10 +25,13 @@ Added features:
 ~ now miner shows AMD GPUs power draw stat on newer AMD drivers (tested with 20.12.1).
 
 ~ now miner shows AMD driver version at startup and warns if driver's version is not
-  supported.
+  supported (i.e. lower than 20.5.1)
 
 ~ now miner saves AMD Polaris GPUs' core and memory clocks/voltages at startup (before
   applying custom ones with -cclock,-mclock,-cvddc,-mvdcc) and restores it during exit.
+
+~ now miner saves AMD Navi GPUs' core clocks/voltages and memory clocks at startup (before
+  applying custom ones with -cclock,-mclock,-cvddc) and restores it during exit.
 
 
 Fixed bugs of the original miner:
@@ -57,15 +60,15 @@ complete its job successfully, you will see green colored message below
 Claymore's logo:
 
  ******************************************************************
- *               MoreEpochs mod v2.2 by JustAMiner                *
+ *               MoreEpochs mod v2.4 by JustAMiner                *
  *                    justaminer@tutanota.com                     *
  *       https://bitcointalk.org/index.php?topic=5305046.0        *
  ******************************************************************
 
 and now the miner is able to work with DAG epochs up to 500.
 
-If you don't see this message, make sure you are using my original mod from
-my download link. If it still doesn't work for you, contact me and I will 
+If you don't see this message, make sure you are using my original archive
+from my download link. If it still doesn't work for you, contact me and I will 
 try to help you.
 
 
@@ -76,7 +79,7 @@ AMD GPUs support:
 Drivers:
 --------
 
-You should use AMD video driver 20.5.1 or newer (most tests were done on
+You have to use AMD video driver 20.5.1 or newer (most tests were done on
 driver 20.12.1), because older drivers can't allocate 4+ GB video buffer
 as single piece and that will prevent the miner from creating 4+ GB DAG.
 
@@ -138,9 +141,7 @@ where x is GPU index that rxboost/strap applied to and "..." is specific strap.
 
 Be aware, that some software can prevent straps from working. For example tool
 named "HwInfo" does that, if you started it once, straps won't have effect
-on mining speed until you reboot your rig. Also make sure that you didn't
-set manual memory timings in AMD Radeon Software, this also doesn't allow
-straps to work.
+on mining speed until you reboot your rig. 
 
 
 Please note that both -rxboost and -strap can crash/freeze your rig because
@@ -217,13 +218,31 @@ Email: justaminer@tutanota.com
 MOD VERSION HISTORY:
 ********************
 
+v2.4
+----------------
+
+- Improved straps apply method for Polaris GPUs. Most issues when miner reports that strap was applied successfully but hash speed doesn't increase are
+  solved. Custom memory timing level that was set in AMD Software (Wattman) doesn't affect straps apply success anymore.
+
+- Now miner warns if Compute Mode is not enabled for AMD GPUs. 
+
+
+v2.3
+----------------
+
+- Now miner saves AMD Navi GPUs' core clocks/voltages and memory clocks at startup (before applying custom ones with -cclock,-mclock,-cvddc)
+  and restores it during exit.
+
+- Fixed bug that can occur during saving/restore clocks/voltages for AMD Polaris GPUs.
+
+
 v2.2
 ----------------
 
 - Now miner saves AMD Polaris GPUs' core and memory clocks/voltages at startup (before applying custom ones with -cclock,-mclock,-cvddc,-mvdcc)
   and restores it during exit.
 
-- Now miner shows AMD driver version at startup and warns if it's not supported.
+- Now miner shows AMD driver version at startup and warns if driver's version is not supported (i.e. lower than 20.5.1)
 
 - Fixed bug of original miner with applying -cclock values to Navi GPUs on new video drivers.
 
@@ -263,7 +282,7 @@ v1.9
 v1.8
 ----------------
 
-- Fixed issue with incorrect shares on 8 GB Polaris AMD GPUs: RX 470, 480, 570, 580 (tested on AMD video driver 20.12.1).
+- Fixed issue with incorrect shares on 8 GB Polaris AMD GPUs: RX 470, 480, 570, 580, 590 (tested on AMD video driver 20.12.1).
 
 - Command line option "-rxboost 1" works fine with Polaris AMD GPUs (tested on AMD video driver 20.12.1).
   For now avoid using "-strap" command line option for AMD GPUs, it will crash rig. This problem will be fixed in 
