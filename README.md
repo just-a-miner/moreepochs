@@ -1,4 +1,4 @@
-MoreEpochs mod v2.4 by JustAMiner
+MoreEpochs mod v2.5 by JustAMiner
 *********************************
 
 Default Claymore ETH Miner v15.0 only supports up to 384 DAG epoch, and
@@ -14,6 +14,9 @@ The mod also fixes bugs of the original miner and adds new features:
 
 Added features:
 ---------------
+
+~ lowest in the industry 0.6% devfee! (it means that every 95 minutes the miner
+  will mine devfee for 35 seconds).
 
 ~ command line option "-strap" now works for AMD Polaris GPUs on video drivers 20.5.1+,
   that allows the mod to outperform any other miner for Polaris GPUs.
@@ -217,6 +220,15 @@ Email: justaminer@tutanota.com
 
 MOD VERSION HISTORY:
 ********************
+
+v2.5
+----------------
+
+- Devfee is reduced to lowest in the industry 0.6% ! (it means that every 95 minutes the miner will mine devfee for 35 seconds).
+
+- Now miner applies straps only once after first DAG generation at start, and doesn't reapply straps again in case of epoch's change during mining to
+  increase stability.
+
 
 v2.4
 ----------------
