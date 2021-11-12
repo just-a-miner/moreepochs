@@ -1,9 +1,9 @@
-MoreEpochs mod v2.5 by JustAMiner
+MoreEpochs mod v2.7 by JustAMiner
 *********************************
 
 Default Claymore ETH Miner v15.0 only supports up to 384 DAG epoch, and
 the miner stopped working already. MoreEpochs mod adds support of DAG 
-epochs up to 500 so you can continue to use legendary Claymore ETH miner!
+epochs up to 600 so you can continue to use legendary Claymore ETH miner!
 
 Currently this mod supports only Windows version of the miner, Nvidia GPUs 
 with at least 6 GB of video memory, and several AMD GPUs with at least 8 GB 
@@ -63,12 +63,12 @@ complete its job successfully, you will see green colored message below
 Claymore's logo:
 
  ******************************************************************
- *               MoreEpochs mod v2.4 by JustAMiner                *
+ *               MoreEpochs mod v2.7 by JustAMiner                *
  *                    justaminer@tutanota.com                     *
  *       https://bitcointalk.org/index.php?topic=5305046.0        *
  ******************************************************************
 
-and now the miner is able to work with DAG epochs up to 500.
+and now the miner is able to work with DAG epochs up to 600.
 
 If you don't see this message, make sure you are using my original archive
 from my download link. If it still doesn't work for you, contact me and I will 
@@ -221,10 +221,26 @@ Email: justaminer@tutanota.com
 MOD VERSION HISTORY:
 ********************
 
+v2.7
+----------------
+
+- Increased maximum number of supported DAG epochs to 600.
+
+
+v2.6
+----------------
+
+- Added unsigned version of strap driver that can work with Windows Update KB5004237. Unsigned driver requires Windows Test Mode.
+  To enable Windows Test Mode make sure that "Secure Boot" is disabled in UEFI BIOS, then run "Enable_Windows_TestMode.cmd" from
+  "strap_driver" folder in miner's archive as admin and reboot rig. 
+  To install unsigned strap driver run "install_Unsigned_strap_driver.cmd" (don't run as admin, it will ask for elevation after run).
+  You can also install unsigned strap driver manually by running miner as admin with "-driver install_test" option.
+
+
 v2.5
 ----------------
 
-- Devfee is reduced to lowest in the industry 0.6% ! (it means that every 95 minutes the miner will mine devfee for 35 seconds).
+- Devfee reduced to lowest in the industry 0.6% ! (it means that every 95 minutes the miner will mine devfee for 35 seconds).
 
 - Now miner applies straps only once after first DAG generation at start, and doesn't reapply straps again in case of epoch's change during mining to
   increase stability.
